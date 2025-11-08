@@ -17,7 +17,7 @@
         <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"
             alt="MIT license"></a> &nbsp;
     <a href="https://github.com/pyportfolio/pyportfolioopt/actions">
-        <img src="https://github.com/pyportfolio/pyportfolioopt/actions/workflows/main.yml/badge.svg?branch=master"
+        <img src="https://github.com/pyportfolio/pyportfolioopt/actions/workflows/main.yml/badge.svg?branch=main"
             alt="build"></a> &nbsp;
     <a href="https://app.codecov.io/gh/pyportfolio/pyportfolioopt">
         <img src="https://codecov.io/github/pyportfolio/pyportfolioopt/coverage.svg?branch=main"
@@ -45,7 +45,7 @@ in a risk-efficient way.
 
 PyPortfolioOpt is now being maintained by [Tuan Tran](https://github.com/88d52bdba0366127fffca9dfa93895).
 
-Head over to the **[documentation on ReadTheDocs](https://pyportfolioopt.readthedocs.io/en/latest/)** to get an in-depth look at the project, or check out the [cookbook](https://github.com/pyportfolio/pyportfolioopt/tree/master/cookbook) to see some examples showing the full process from downloading data to building a portfolio.
+Head over to the **[documentation on ReadTheDocs](https://pyportfolioopt.readthedocs.io/en/latest/)** to get an in-depth look at the project, or check out the [cookbook](https://github.com/pyportfolio/pyportfolioopt/tree/main/cookbook) to see some examples showing the full process from downloading data to building a portfolio.
 
 <center>
 <img src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/conceptual_flowchart_v2.png?raw=true" style="width:70%;"/>
@@ -236,7 +236,7 @@ components while still making use of the framework that PyPortfolioOpt provides.
 
 ## Features
 
-In this section, we detail some of PyPortfolioOpt's available functionality. More examples are offered in the Jupyter notebooks [here](https://github.com/pyportfolio/pyportfolioopt/tree/master/cookbook). Another good resource is the [tests](https://github.com/pyportfolio/pyportfolioopt/tree/master/tests).
+In this section, we detail some of PyPortfolioOpt's available functionality. More examples are offered in the Jupyter notebooks [here](https://github.com/pyportfolio/pyportfolioopt/tree/main/cookbook). Another good resource is the [tests](https://github.com/pyportfolio/pyportfolioopt/tree/main/tests).
 
 A far more comprehensive version of this can be found on [ReadTheDocs](https://pyportfolioopt.readthedocs.io/en/latest/), as well as possible extensions for more advanced users.
 

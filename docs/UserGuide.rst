@@ -46,7 +46,7 @@ This dataset should look something like the one below::
 
 The index should consist of dates or timestamps, and each column should represent the
 time series of prices for an asset. A dataset of real-life stock prices has been
-included in the `tests folder <https://github.com/pyportfolio/pyportfolioopt/tree/master/tests>`_
+included in the `tests folder <https://github.com/pyportfolio/pyportfolioopt/tree/main/tests>`_
 of the GitHub repo.
 
 .. note::
