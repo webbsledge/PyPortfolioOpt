@@ -1,5 +1,5 @@
 <p align="center">
-    <img width=60% src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/logo_v1.png?raw=true">
+    <img width=60% src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/logo_v1.png?raw=true">
 </p>
 
 <!-- buttons -->
@@ -16,16 +16,16 @@
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"
             alt="MIT license"></a> &nbsp;
-    <a href="https://github.com/robertmartin8/PyPortfolioOpt/actions">
-        <img src="https://github.com/robertmartin8/PyPortfolioOpt/actions/workflows/main.yml/badge.svg?branch=master"
+    <a href="https://github.com/pyportfolio/pyportfolioopt/actions">
+        <img src="https://github.com/pyportfolio/pyportfolioopt/actions/workflows/main.yml/badge.svg?branch=master"
             alt="build"></a> &nbsp;
-    <a href="https://app.codecov.io/gh/robertmartin8/PyPortfolioOpt">
-        <img src="https://codecov.io/github/robertmartin8/PyPortfolioOpt/coverage.svg?branch=main"
+    <a href="https://app.codecov.io/gh/pyportfolio/pyportfolioopt">
+        <img src="https://codecov.io/github/pyportfolio/pyportfolioopt/coverage.svg?branch=main"
             alt="codecov"></a> &nbsp;
     <a href="https://pepy.tech/project/pyportfolioopt">
         <img src="https://pepy.tech/badge/pyportfolioopt"
             alt="downloads"></a> &nbsp;
-    <a href="https://mybinder.org/v2/gh/robertmartin8/pyportfolioopt/master/?filepath=cookbook">
+    <a href="https://mybinder.org/v2/gh/pyportfolio/pyportfolioopt/main/?filepath=cookbook">
       <img src="https://mybinder.org/badge_logo.svg"
             alt="binder"></a> &nbsp;
 </p>
@@ -45,10 +45,10 @@ in a risk-efficient way.
 
 PyPortfolioOpt is now being maintained by [Tuan Tran](https://github.com/88d52bdba0366127fffca9dfa93895).
 
-Head over to the **[documentation on ReadTheDocs](https://pyportfolioopt.readthedocs.io/en/latest/)** to get an in-depth look at the project, or check out the [cookbook](https://github.com/robertmartin8/PyPortfolioOpt/tree/master/cookbook) to see some examples showing the full process from downloading data to building a portfolio.
+Head over to the **[documentation on ReadTheDocs](https://pyportfolioopt.readthedocs.io/en/latest/)** to get an in-depth look at the project, or check out the [cookbook](https://github.com/pyportfolio/pyportfolioopt/tree/master/cookbook) to see some examples showing the full process from downloading data to building a portfolio.
 
 <center>
-<img src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/conceptual_flowchart_v2.png?raw=true" style="width:70%;"/>
+<img src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/conceptual_flowchart_v2.png?raw=true" style="width:70%;"/>
 </center>
 
 ## Table of contents
@@ -74,7 +74,7 @@ Head over to the **[documentation on ReadTheDocs](https://pyportfolioopt.readthe
 
 ## Getting started
 
-If you would like to play with PyPortfolioOpt interactively in your browser, you may launch Binder [here](https://mybinder.org/v2/gh/robertmartin8/pyportfolioopt/master). It takes a
+If you would like to play with PyPortfolioOpt interactively in your browser, you may launch Binder [here](https://mybinder.org/v2/gh/pyportfolio/pyportfolioopt/main). It takes a
 while to set up, but it lets you try out the cookbook recipes without having to deal with all of the requirements.
 
 _Note: macOS users will need to install [Command Line Tools](https://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/)._
@@ -126,13 +126,13 @@ For more information, please read [this guide](https://docker-curriculum.com/#in
 If you would like to make major changes to integrate this with your proprietary system, it probably makes sense to clone this repository and to just use the source code.
 
 ```bash
-git clone https://github.com/robertmartin8/PyPortfolioOpt
+git clone https://github.com/pyportfolio/pyportfolioopt
 ```
 
 Alternatively, you could try:
 
 ```bash
-pip install -e git+https://github.com/robertmartin8/PyPortfolioOpt.git
+pip install -e git+https://github.com/pyportfolio/pyportfolioopt.git
 ```
 
 ## A quick example
@@ -211,14 +211,14 @@ Discrete allocation: {'GOOG': 1, 'AAPL': 4, 'FB': 12, 'BABA': 4, 'BBY': 2,
 Funds remaining: $11.89
 ```
 
-_Disclaimer: nothing about this project constitues investment advice, and the author bears no responsibiltiy for your subsequent investment decisions. Please refer to the [license](https://github.com/robertmartin8/PyPortfolioOpt/blob/master/LICENSE.txt) for more information._
+_Disclaimer: nothing about this project constitues investment advice, and the author bears no responsibiltiy for your subsequent investment decisions. Please refer to the [license](https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/LICENSE.txt) for more information._
 
 ## An overview of classical portfolio optimization methods
 
 Harry Markowitz's 1952 paper is the undeniable classic, which turned portfolio optimization from an art into a science. The key insight is that by combining assets with different expected returns and volatilities, one can decide on a mathematically optimal allocation which minimises the risk for a target return – the set of all such optimal portfolios is referred to as the **efficient frontier**.
 
 <center>
-<img src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/efficient_frontier_white.png?raw=true" style="width:60%;"/>
+<img src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/efficient_frontier_white.png?raw=true" style="width:60%;"/>
 </center>
 
 Although much development has been made in the subject, more than half a century later, Markowitz's core ideas are still fundamentally important and see daily use in many portfolio management firms.
@@ -236,7 +236,7 @@ components while still making use of the framework that PyPortfolioOpt provides.
 
 ## Features
 
-In this section, we detail some of PyPortfolioOpt's available functionality. More examples are offered in the Jupyter notebooks [here](https://github.com/robertmartin8/PyPortfolioOpt/tree/master/cookbook). Another good resource is the [tests](https://github.com/robertmartin8/PyPortfolioOpt/tree/master/tests).
+In this section, we detail some of PyPortfolioOpt's available functionality. More examples are offered in the Jupyter notebooks [here](https://github.com/pyportfolio/pyportfolioopt/tree/master/cookbook). Another good resource is the [tests](https://github.com/pyportfolio/pyportfolioopt/tree/master/tests).
 
 A far more comprehensive version of this can be found on [ReadTheDocs](https://pyportfolioopt.readthedocs.io/en/latest/), as well as possible extensions for more advanced users.
 
@@ -272,7 +272,7 @@ The covariance matrix encodes not just the volatility of an asset, but also how 
   - implemented in `sklearn.covariance`
 
 <p align="center">
-    <img width=60% src="https://github.com/robertmartin8/PyPortfolioOpt/blob/master/media/corrplot_white.png?raw=true">
+    <img width=60% src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/corrplot_white.png?raw=true">
 </p>
 
 (This plot was generated using `plotting.plot_covariance`)
@@ -420,7 +420,7 @@ BibTex::
 
 ## Contributing
 
-Contributions are _most welcome_. Have a look at the [Contribution Guide](https://github.com/robertmartin8/PyPortfolioOpt/blob/master/CONTRIBUTING.md) for more.
+Contributions are _most welcome_. Have a look at the [Contribution Guide](https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/CONTRIBUTING.md) for more.
 
 I'd like to thank all of the people who have contributed to PyPortfolioOpt since its release in 2018.
 Special shout-outs to:

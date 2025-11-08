@@ -5,7 +5,7 @@ description = "Financial portfolio optimization in python"
 license = "MIT"
 authors = ["Robert Andrew Martin <martin.robertandrew@gmail.com>"]
 readme = "README.md"
-repository = "https://github.com/robertmartin8/PyPortfolioOpt"
+repository = "https://github.com/pyportfolio/pyportfolioopt"
 documentation = "https://pyportfolioopt.readthedocs.io/en/latest/"
 keywords= ["finance", "portfolio", "optimization", "quant", "investing"]
 classifiers=[
@@ -28,7 +28,7 @@ classifiers=[
 packages = [ {include = "pypfopt"} ]
 
 [tool.poetry.urls]
-"Issues" = "https://github.com/robertmartin8/PyPortfolioOpt/issues"
+"Issues" = "https://github.com/pyportfolio/pyportfolioopt/issues"
 "Personal website" = "https://reasonabledeviations.com"
 
 [tool.poetry.dependencies]

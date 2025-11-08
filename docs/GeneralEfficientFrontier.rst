@@ -229,7 +229,7 @@ You can either optimize some generic ``convex_objective``
 (which *must* be built using ``cvxpy`` atomic functions -- see `here <https://www.cvxpy.org/tutorial/functions/index.html>`_)
 or a ``nonconvex_objective``, which uses ``scipy.optimize`` as the backend and thus has a completely
 different API. For more examples, check out this `cookbook recipe
-<https://github.com/robertmartin8/PyPortfolioOpt/blob/master/cookbook/3-Advanced-Mean-Variance-Optimization.ipynb>`_.
+<https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/cookbook/3-Advanced-Mean-Variance-Optimization.ipynb>`_.
 
     .. class:: pypfopt.base_optimizer.BaseConvexOptimizer
 

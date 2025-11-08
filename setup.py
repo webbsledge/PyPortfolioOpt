@@ -14,7 +14,7 @@ if __name__ == "__main__":
         description="Financial portfolio optimization in python",
         long_description=desc,
         long_description_content_type="text/markdown",
-        url="https://github.com/robertmartin8/PyPortfolioOpt",
+        url="https://github.com/pyportfolio/pyportfolioopt",
         author="Robert Andrew Martin",
         author_email="martin.robertandrew@gmail.com",
         license="MIT",
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         python_requires=">=3.8",
         project_urls={
             "Documentation": "https://pyportfolioopt.readthedocs.io/en/latest/",
-            "Issues": "https://github.com/robertmartin8/PyPortfolioOpt/issues",
+            "Issues": "https://github.com/pyportfolio/pyportfolioopt/issues",
             "Personal website": "https://reasonabledeviations.com",
         },
     )
