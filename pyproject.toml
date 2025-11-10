@@ -10,8 +10,6 @@ authors = [
     { name = "Robert Andrew Martin", email = "martin.robertandrew@gmail.com" },
 ]
 readme = "README.md"
-repository = "https://github.com/pyportfolio/pyportfolioopt"
-documentation = "https://pyportfolioopt.readthedocs.io/en/latest/"
 keywords= ["finance", "portfolio", "optimization", "quant", "investing"]
 classifiers=[
         "Development Status :: 4 - Beta",
@@ -30,7 +28,6 @@ classifiers=[
         "Topic :: Office/Business :: Financial",
         "Topic :: Office/Business :: Financial :: Investment",
     ]
-packages = [ {include = "pypfopt"} ]
 
 # core dependencies of pyportfolioopt
 # this set should be kept minimal!
