@@ -321,6 +321,8 @@ def test_weight_plot_add_attribute():
 
 
 def test_plotting_edge_case():
+    import matplotlib.pyplot as plt
+
     # raised in issue #333
     mu = pd.Series([0.043389, 0.036194])
     S = pd.DataFrame([[0.000562, 0.002273], [0.002273, 0.027710]])
