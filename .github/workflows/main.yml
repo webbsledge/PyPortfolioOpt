@@ -47,7 +47,6 @@ jobs:
 
       - name: Show dependencies
         run: uv pip list
-          cache: "pip"
 
       - name: Test with pytest
         run: |
