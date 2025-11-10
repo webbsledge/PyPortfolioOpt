@@ -59,6 +59,7 @@ all_extras = [
     "cvxopt; python_version < '3.14'",
 ]
 
+# dev - the developer dependency set, for contributors
 dev = [
     "pytest>=7.1.2",
     "flake8>=4.0.1",
