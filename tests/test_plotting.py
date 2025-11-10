@@ -1,8 +1,6 @@
 import os
 import tempfile
 
-import matplotlib
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pytest
@@ -19,6 +17,8 @@ from tests.utilities_for_tests import get_data, setup_efficient_frontier
 
 
 def test_correlation_plot():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     df = get_data()
     S = risk_models.CovarianceShrinkage(df).ledoit_wolf()
@@ -50,6 +50,9 @@ def test_correlation_plot():
 
 
 def test_dendrogram_plot():
+    import matplotlib
+    import matplotlib.pyplot as plt
+
     plt.figure()
     df = get_data()
     returns = df.pct_change().dropna(how="all")
@@ -84,6 +87,8 @@ def test_dendrogram_plot():
 
 
 def test_cla_plot():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     df = get_data()
     rets = expected_returns.mean_historical_return(df)
@@ -101,6 +106,8 @@ def test_cla_plot():
 
 
 def test_cla_plot_ax():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     df = get_data()
     rets = expected_returns.mean_historical_return(df)
@@ -115,6 +122,8 @@ def test_cla_plot_ax():
 
 
 def test_default_ef_plot():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     ax = plotting.plot_efficient_frontier(ef, show_assets=True)
@@ -132,6 +141,8 @@ def test_default_ef_plot():
 
 
 def test_default_ef_plot_labels():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     ax = plotting.plot_efficient_frontier(ef, show_assets=True, show_tickers=True)
@@ -140,6 +151,8 @@ def test_default_ef_plot_labels():
 
 
 def test_ef_plot_utility():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     delta_range = np.arange(0.001, 50, 1)
@@ -152,6 +165,8 @@ def test_ef_plot_utility():
 
 
 def test_ef_plot_errors():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     delta_range = np.arange(0.001, 50, 1)
@@ -170,6 +185,8 @@ def test_ef_plot_errors():
 
 
 def test_ef_plot_risk():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     ef.min_volatility()
@@ -186,6 +203,8 @@ def test_ef_plot_risk():
 
 
 def test_ef_plot_return():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     # Internally _max_return() is used, so subtract epsilon
@@ -200,6 +219,8 @@ def test_ef_plot_return():
 
 
 def test_ef_plot_utility_short():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = EfficientFrontier(
         *setup_efficient_frontier(data_only=True), weight_bounds=(None, None)
@@ -214,6 +235,8 @@ def test_ef_plot_utility_short():
 
 
 def test_constrained_ef_plot_utility():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = setup_efficient_frontier()
     ef.add_constraint(lambda w: w[0] >= 0.2)
@@ -230,6 +253,8 @@ def test_constrained_ef_plot_utility():
 
 
 def test_constrained_ef_plot_risk():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     ef = EfficientFrontier(
         *setup_efficient_frontier(data_only=True), weight_bounds=(None, None)
@@ -250,6 +275,8 @@ def test_constrained_ef_plot_risk():
 
 
 def test_weight_plot():
+    import matplotlib.pyplot as plt
+
     plt.figure()
     df = get_data()
     returns = df.pct_change().dropna(how="all")
@@ -263,6 +290,8 @@ def test_weight_plot():
 
 
 def test_weight_plot_multi():
+    import matplotlib.pyplot as plt
+
     ef = setup_efficient_frontier()
     w1 = ef.min_volatility()
     ef = setup_efficient_frontier()
@@ -279,6 +308,8 @@ def test_weight_plot_multi():
 
 
 def test_weight_plot_add_attribute():
+    import matplotlib.pyplot as plt
+
     plt.figure()
 
     ef = setup_efficient_frontier()
