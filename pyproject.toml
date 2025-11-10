@@ -3,7 +3,12 @@ name = "pyportfolioopt"
 version = "1.5.6"
 description = "Financial portfolio optimization in python"
 license = "MIT"
-authors = ["Robert Andrew Martin <martin.robertandrew@gmail.com>"]
+maintainers = [
+    { name = "Robert Andrew Martin", email = "martin.robertandrew@gmail.com" },
+]
+authors = [
+    { name = "Robert Andrew Martin", email = "martin.robertandrew@gmail.com" },
+]
 readme = "README.md"
 repository = "https://github.com/pyportfolio/pyportfolioopt"
 documentation = "https://pyportfolioopt.readthedocs.io/en/latest/"
