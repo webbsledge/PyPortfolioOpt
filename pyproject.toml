@@ -2,7 +2,7 @@
 name = "pyportfolioopt"
 version = "1.5.6"
 description = "Financial portfolio optimization in python"
-license = "MIT"
+license = { file = "LICENSE" }
 maintainers = [
     { name = "Robert Andrew Martin", email = "martin.robertandrew@gmail.com" },
 ]
