@@ -35,6 +35,8 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: uv pip install ".[dev,all_extras]" --no-cache-dir
+        env:
+          UV_SYSTEM_PYTHON: 1
 
       - name: Show dependencies
         run: uv pip list
