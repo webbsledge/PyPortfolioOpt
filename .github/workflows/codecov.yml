@@ -24,8 +24,7 @@ jobs:
           cache: "pip"
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install ecos
+          pip install -e ".[dev,all_extras]"
       - name: Generate coverage report
         run: |
           pip install pytest pytest-cov
