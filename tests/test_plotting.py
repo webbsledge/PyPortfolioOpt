@@ -4,6 +4,7 @@ import tempfile
 import numpy as np
 import pandas as pd
 import pytest
+from skbase.utils.dependencies import _check_soft_dependencies
 
 from pypfopt import (
     CLA,
@@ -16,6 +17,10 @@ from pypfopt import (
 from tests.utilities_for_tests import get_data, setup_efficient_frontier
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_correlation_plot():
     import matplotlib.pyplot as plt
 
@@ -49,6 +54,10 @@ def test_correlation_plot():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_dendrogram_plot():
     import matplotlib
     import matplotlib.pyplot as plt
@@ -86,6 +95,10 @@ def test_dendrogram_plot():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_cla_plot():
     import matplotlib.pyplot as plt
 
@@ -105,6 +118,10 @@ def test_cla_plot():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_cla_plot_ax():
     import matplotlib.pyplot as plt
 
@@ -121,6 +138,10 @@ def test_cla_plot_ax():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_default_ef_plot():
     import matplotlib.pyplot as plt
 
@@ -140,6 +161,10 @@ def test_default_ef_plot():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_default_ef_plot_labels():
     import matplotlib.pyplot as plt
 
@@ -150,6 +175,10 @@ def test_default_ef_plot_labels():
     plt.clf()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_ef_plot_utility():
     import matplotlib.pyplot as plt
 
@@ -164,6 +193,10 @@ def test_ef_plot_utility():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_ef_plot_errors():
     import matplotlib.pyplot as plt
 
@@ -184,6 +217,10 @@ def test_ef_plot_errors():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_ef_plot_risk():
     import matplotlib.pyplot as plt
 
@@ -202,6 +239,10 @@ def test_ef_plot_risk():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_ef_plot_return():
     import matplotlib.pyplot as plt
 
@@ -218,6 +259,10 @@ def test_ef_plot_return():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_ef_plot_utility_short():
     import matplotlib.pyplot as plt
 
@@ -234,6 +279,10 @@ def test_ef_plot_utility_short():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_constrained_ef_plot_utility():
     import matplotlib.pyplot as plt
 
@@ -252,6 +301,10 @@ def test_constrained_ef_plot_utility():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_constrained_ef_plot_risk():
     import matplotlib.pyplot as plt
 
@@ -274,6 +327,10 @@ def test_constrained_ef_plot_risk():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_weight_plot():
     import matplotlib.pyplot as plt
 
@@ -289,6 +346,10 @@ def test_weight_plot():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_weight_plot_multi():
     import matplotlib.pyplot as plt
 
@@ -307,6 +368,10 @@ def test_weight_plot_multi():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_weight_plot_add_attribute():
     import matplotlib.pyplot as plt
 
@@ -320,6 +385,10 @@ def test_weight_plot_add_attribute():
     plt.close()
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_plotting_edge_case():
     import matplotlib.pyplot as plt
 
@@ -339,6 +408,10 @@ def test_plotting_edge_case():
         )
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["matplotlib"], severity="none"),
+    reason="skip test if matplotlib is not installed in environment",
+)
 def test_plot_efficient_frontier():
     ef = setup_efficient_frontier()
     ef.min_volatility()

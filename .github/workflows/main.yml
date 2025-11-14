@@ -105,7 +105,7 @@ jobs:
 
   pytest:
     needs: pytest-nosoftdeps
-    name: py${{ matrix.python-version }} on ${{ matrix.os }}
+    name: (${{ matrix.python-version }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     env:
       MPLBACKEND: Agg # https://github.com/orgs/community/discussions/26434
@@ -145,7 +145,7 @@ jobs:
           pytest ./tests
 
   codecov:
-    name: py${{ matrix.python-version }} on ${{ matrix.os }}
+    name: coverage (${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     needs: code-quality
     env:
