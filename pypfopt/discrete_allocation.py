@@ -278,7 +278,7 @@ class DiscreteAllocation:
                 "None, the cvxpy default solver, in release 1.7.0."
                 "To continue using ECOS_BB as the solver, "
                 "please set solver='ECOS_BB' explicitly.",
-                    FutureWarning,
+                FutureWarning,
             )
         # end todo
 
