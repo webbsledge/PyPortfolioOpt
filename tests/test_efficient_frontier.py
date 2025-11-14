@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import scipy.optimize as sco
+from skbase.utils.dependencies import _check_soft_dependencies
 
 from pypfopt import (
     EfficientFrontier,
@@ -106,6 +107,10 @@ def test_min_volatility():
     )
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["ecos"], severity="none"),
+    reason="skip test if ecos is not installed in environment",
+)
 def test_min_volatility_different_solver():
     ef = setup_efficient_frontier(solver="ECOS")
     w = ef.min_volatility()
