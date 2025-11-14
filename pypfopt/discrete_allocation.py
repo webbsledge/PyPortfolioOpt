@@ -272,14 +272,14 @@ class DiscreteAllocation:
         """
         # todo 1.7.0: remove this defaulting behavior
         if solver is None and _check_soft_dependencies("ecos", severity="none"):
-           solver="ECOS_BB"
-           warn(
-               "The default solver for lp_portfolio will change from ECOS_BB to"
-               "None, the cvxpy default solver, in release 1.7.0."
-               "To continue using ECOS_BB as the solver, "
-               "please set solver='ECOS_BB' explicitly.",
-                FutureWarning,
-           )
+            solver = "ECOS_BB"
+            warn(
+                "The default solver for lp_portfolio will change from ECOS_BB to"
+                "None, the cvxpy default solver, in release 1.7.0."
+                "To continue using ECOS_BB as the solver, "
+                "please set solver='ECOS_BB' explicitly.",
+                    FutureWarning,
+            )
         # end todo
 
         if any([w < 0 for _, w in self.weights]):
