@@ -1,6 +1,6 @@
+from cvxpy.error import SolverError
 import numpy as np
 import pytest
-from cvxpy.error import SolverError
 from skbase.utils.dependencies import _check_soft_dependencies
 
 from pypfopt import (
