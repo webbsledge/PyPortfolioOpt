@@ -51,6 +51,7 @@ jobs:
           fi
 
   pytest-nosoftdeps:
+    needs: code-quality
     name: nosoftdeps (${{ matrix.python-version }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     env:
@@ -103,7 +104,7 @@ jobs:
           flake8 --show-source --statistics .
 
   pytest:
-    needs: code-quality
+    needs: pytest-nosoftdeps
     name: py${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     env:
@@ -193,8 +194,8 @@ jobs:
           fail_ci_if_error: true
 
   notebooks:
-    runs-on: ubuntu-latest
     needs: code-quality
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
