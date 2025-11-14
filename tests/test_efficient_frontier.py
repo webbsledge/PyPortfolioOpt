@@ -1047,6 +1047,10 @@ def test_efficient_risk_market_neutral_L2_reg():
     )
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["ecos"], severity="none"),
+    reason="skip test if ecos is not installed in environment",
+)
 def test_efficient_risk_market_neutral_warning():
     ef = setup_efficient_frontier(solver=cp.ECOS)
     with pytest.warns(RuntimeWarning) as w:
@@ -1093,6 +1097,10 @@ def test_efficient_frontier_error():
         EfficientFrontier(ef.expected_returns, 0.01)
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["ecos"], severity="none"),
+    reason="skip test if ecos is not installed in environment",
+)
 def test_efficient_return_many_values():
     ef = setup_efficient_frontier(solver=cp.ECOS)
     for target_return in np.arange(0.25, 0.28, 0.01):
@@ -1222,6 +1230,10 @@ def test_efficient_return_market_neutral_unbounded():
     assert long_only_sharpe < sharpe
 
 
+@pytest.mark.skipif(
+    not _check_soft_dependencies(["ecos"], severity="none"),
+    reason="skip test if ecos is not installed in environment",
+)
 def test_efficient_return_market_neutral_warning():
     # This fails
     ef = setup_efficient_frontier(solver=cp.ECOS)
