@@ -25,7 +25,6 @@ import warnings
 
 import numpy as np
 import pandas as pd
-from skbase.utils.dependencies import _check_soft_dependencies
 
 from .expected_returns import returns_from_prices
 
@@ -182,7 +181,7 @@ def semicovariance(
     benchmark=0.000079,
     frequency=252,
     log_returns=False,
-    **kwargs,
+    **kwargs
 ):
     """
     Estimate the semicovariance matrix, i.e the covariance given that
@@ -291,7 +290,7 @@ def min_cov_determinant(
     frequency=252,
     random_state=None,
     log_returns=False,
-    **kwargs,
+    **kwargs
 ):  # pragma: no cover
     warnings.warn("min_cov_determinant is deprecated and will be removed in v1.5")
 
@@ -299,14 +298,11 @@ def min_cov_determinant(
         warnings.warn("data is not in a dataframe", RuntimeWarning)
         prices = pd.DataFrame(prices)
 
-    if not _check_soft_dependencies(["scikit-learn"], severity="none"):
-        raise ImportError(
-            "scikit-learn is required to use min_cov_determinant. "
-            "Please ensure that scikit-learn is installed in your environment,"
-            " e.g via pip install scikit-learn"
-        )
-
-    from sklearn.covariance import fast_mcd
+    # Extra dependency
+    try:
+        import sklearn.covariance
+    except (ModuleNotFoundError, ImportError):
+        raise ImportError("Please install scikit-learn via pip or poetry")
 
     assets = prices.columns
 
@@ -316,7 +312,7 @@ def min_cov_determinant(
         X = returns_from_prices(prices, log_returns)
     # X = np.nan_to_num(X.values)
     X = X.dropna().values
-    raw_cov_array = fast_mcd(X, random_state=random_state)[1]
+    raw_cov_array = sklearn.covariance.fast_mcd(X, random_state=random_state)[1]
     cov = pd.DataFrame(raw_cov_array, index=assets, columns=assets) * frequency
     return fix_nonpositive_semidefinite(cov, kwargs.get("fix_method", "spectral"))
 
@@ -383,16 +379,13 @@ class CovarianceShrinkage:
         :param log_returns: whether to compute using log returns
         :type log_returns: bool, defaults to False
         """
-        if not _check_soft_dependencies(["scikit-learn"], severity="none"):
-            raise ImportError(
-                "scikit-learn is required to use CovarianceShrinkage. "
-                "Please ensure that scikit-learn is installed in your environment,"
-                " e.g via pip install scikit-learn"
-            )
+        # Optional import
+        try:
+            from sklearn import covariance
 
-        from sklearn import covariance
-
-        self.covariance = covariance
+            self.covariance = covariance
+        except (ModuleNotFoundError, ImportError):  # pragma: no cover
+            raise ImportError("Please install scikit-learn via pip or poetry")
 
         if not isinstance(prices, pd.DataFrame):
             warnings.warn("data is not in a dataframe", RuntimeWarning)

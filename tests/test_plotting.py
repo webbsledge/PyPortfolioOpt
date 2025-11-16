@@ -1,10 +1,11 @@
 import os
 import tempfile
 
+import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pytest
-from skbase.utils.dependencies import _check_soft_dependencies
 
 from pypfopt import (
     CLA,
@@ -17,13 +18,7 @@ from pypfopt import (
 from tests.utilities_for_tests import get_data, setup_efficient_frontier
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_correlation_plot():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     df = get_data()
     S = risk_models.CovarianceShrinkage(df).ledoit_wolf()
@@ -54,14 +49,7 @@ def test_correlation_plot():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_dendrogram_plot():
-    import matplotlib
-    import matplotlib.pyplot as plt
-
     plt.figure()
     df = get_data()
     returns = df.pct_change().dropna(how="all")
@@ -70,12 +58,12 @@ def test_dendrogram_plot():
 
     ax = plotting.plot_dendrogram(hrp, showfig=False)
     assert len(ax.findobj()) > 180
-    assert isinstance(ax.findobj()[0], matplotlib.collections.LineCollection)
+    assert type(ax.findobj()[0]) == matplotlib.collections.LineCollection
     plt.clf()
 
     ax = plotting.plot_dendrogram(hrp, show_tickers=False, showfig=False)
     assert len(ax.findobj()) > 60
-    assert isinstance(ax.findobj()[0], matplotlib.collections.LineCollection)
+    assert type(ax.findobj()[0]) == matplotlib.collections.LineCollection
     plt.clf()
     plt.close()
 
@@ -90,18 +78,12 @@ def test_dendrogram_plot():
             == "hrp param has not been optimized.  Attempting optimization."
         )
         assert len(ax.findobj()) > 60
-        assert isinstance(ax.findobj()[0], matplotlib.collections.LineCollection)
+        assert type(ax.findobj()[0]) == matplotlib.collections.LineCollection
     plt.clf()
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_cla_plot():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     df = get_data()
     rets = expected_returns.mean_historical_return(df)
@@ -118,13 +100,7 @@ def test_cla_plot():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_cla_plot_ax():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     df = get_data()
     rets = expected_returns.mean_historical_return(df)
@@ -138,13 +114,7 @@ def test_cla_plot_ax():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_default_ef_plot():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     ax = plotting.plot_efficient_frontier(ef, show_assets=True)
@@ -161,13 +131,7 @@ def test_default_ef_plot():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_default_ef_plot_labels():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     ax = plotting.plot_efficient_frontier(ef, show_assets=True, show_tickers=True)
@@ -175,13 +139,7 @@ def test_default_ef_plot_labels():
     plt.clf()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_ef_plot_utility():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     delta_range = np.arange(0.001, 50, 1)
@@ -193,13 +151,7 @@ def test_ef_plot_utility():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_ef_plot_errors():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     delta_range = np.arange(0.001, 50, 1)
@@ -217,13 +169,7 @@ def test_ef_plot_errors():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_ef_plot_risk():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     ef.min_volatility()
@@ -239,13 +185,7 @@ def test_ef_plot_risk():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_ef_plot_return():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     # Internally _max_return() is used, so subtract epsilon
@@ -259,13 +199,7 @@ def test_ef_plot_return():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_ef_plot_utility_short():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = EfficientFrontier(
         *setup_efficient_frontier(data_only=True), weight_bounds=(None, None)
@@ -279,13 +213,7 @@ def test_ef_plot_utility_short():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_constrained_ef_plot_utility():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = setup_efficient_frontier()
     ef.add_constraint(lambda w: w[0] >= 0.2)
@@ -301,13 +229,7 @@ def test_constrained_ef_plot_utility():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_constrained_ef_plot_risk():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     ef = EfficientFrontier(
         *setup_efficient_frontier(data_only=True), weight_bounds=(None, None)
@@ -327,13 +249,7 @@ def test_constrained_ef_plot_risk():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_weight_plot():
-    import matplotlib.pyplot as plt
-
     plt.figure()
     df = get_data()
     returns = df.pct_change().dropna(how="all")
@@ -346,13 +262,7 @@ def test_weight_plot():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_weight_plot_multi():
-    import matplotlib.pyplot as plt
-
     ef = setup_efficient_frontier()
     w1 = ef.min_volatility()
     ef = setup_efficient_frontier()
@@ -368,13 +278,7 @@ def test_weight_plot_multi():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_weight_plot_add_attribute():
-    import matplotlib.pyplot as plt
-
     plt.figure()
 
     ef = setup_efficient_frontier()
@@ -385,13 +289,7 @@ def test_weight_plot_add_attribute():
     plt.close()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_plotting_edge_case():
-    import matplotlib.pyplot as plt
-
     # raised in issue #333
     mu = pd.Series([0.043389, 0.036194])
     S = pd.DataFrame([[0.000562, 0.002273], [0.002273, 0.027710]])
@@ -408,10 +306,6 @@ def test_plotting_edge_case():
         )
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["matplotlib"], severity="none"),
-    reason="skip test if matplotlib is not installed in environment",
-)
 def test_plot_efficient_frontier():
     ef = setup_efficient_frontier()
     ef.min_volatility()

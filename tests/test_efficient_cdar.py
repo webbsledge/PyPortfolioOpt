@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-from skbase.utils.dependencies import _check_soft_dependencies
 
 from pypfopt import EfficientCDaR, expected_returns, objective_functions
 from pypfopt.exceptions import OptimizationError
@@ -152,10 +151,6 @@ def test_min_cdar_extra_constraints():
     assert w["GOOG"] >= 0.025 and w["MA"] <= 0.035
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["ecos"], severity="none"),
-    reason="skip test if ecos is not installed in environment",
-)
 def test_min_cdar_different_solver():
     cd = setup_efficient_cdar(solver="ECOS")
     w = cd.min_cdar()
@@ -187,10 +182,6 @@ def test_min_cdar_tx_costs():
     assert np.abs(prev_w - w2).sum() < np.abs(prev_w - w1).sum()
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["ecos"], severity="none"),
-    reason="skip test if ecos is not installed in environment",
-)
 def test_min_cdar_L2_reg():
     cd = setup_efficient_cdar(solver="ECOS")
     cd.add_objective(objective_functions.L2_reg, gamma=0.1)
@@ -317,7 +308,6 @@ def test_efficient_risk_market_neutral():
     )
 
 
-@pytest.mark.skip(reason="failing test, unknown reason. See bug report #642.")
 def test_efficient_risk_L2_reg():
     cd = setup_efficient_cdar()
     cd.add_objective(objective_functions.L2_reg, gamma=1)
@@ -382,7 +372,6 @@ def test_efficient_return_short():
     assert long_only_cdar > cdar
 
 
-@pytest.mark.skip(reason="failing test, unknown reason. See bug report #642.")
 def test_efficient_return_L2_reg():
     cd = setup_efficient_cdar()
     cd.add_objective(objective_functions.L2_reg, gamma=1)

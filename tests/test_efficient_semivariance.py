@@ -1,7 +1,6 @@
-from cvxpy.error import SolverError
 import numpy as np
 import pytest
-from skbase.utils.dependencies import _check_soft_dependencies
+from cvxpy.error import SolverError
 
 from pypfopt import (
     EfficientFrontier,
@@ -177,10 +176,6 @@ def test_min_semivariance_extra_constraints():
     assert w["GOOG"] >= 0.025 and w["AAPL"] <= 0.035
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["ecos"], severity="none"),
-    reason="skip test if ecos is not installed in environment",
-)
 def test_min_semivariance_different_solver():
     es = setup_efficient_semivariance(solver="ECOS")
     w = es.min_semivariance()
@@ -317,7 +312,6 @@ def test_max_quadratic_utility():
     )
 
 
-@pytest.mark.skip(reason="failing test, unknown reason. See bug report #642.")
 def test_max_quadratic_utility_range():
     # increasing risk_aversion should lower both vol and return
     df = get_data().dropna(axis=0, how="any")
@@ -352,10 +346,6 @@ def test_max_quadratic_utility_with_shorts():
     )
 
 
-@pytest.mark.skipif(
-    not _check_soft_dependencies(["ecos"], severity="none"),
-    reason="skip test if ecos is not installed in environment",
-)
 def test_max_quadratic_utility_market_neutral():
     es = setup_efficient_semivariance(solver="ECOS", weight_bounds=(-1, 1))
     es.max_quadratic_utility(market_neutral=True)
@@ -412,7 +402,6 @@ def test_efficient_risk():
     )
 
 
-@pytest.mark.skip(reason="failing test, unknown reason. See bug report #642.")
 def test_efficient_risk_low_risk():
     es = setup_efficient_semivariance()
     es.min_semivariance()
