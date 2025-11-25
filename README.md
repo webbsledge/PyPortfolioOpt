@@ -1,6 +1,6 @@
 ## Welcome to PyPortfolioOpt
 
-<a href="https://pyportfolioopt.readthedocs.io/en/latest/"><img src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/logo_v1.png?raw=true" width="175" align="right" /></a>
+<a href="https://pyportfolioopt.readthedocs.io/en/latest/"><img src="https://github.com/PyPortfolio/PyPortfolioOpt/blob/main/media/logo_v1.png?raw=true" width="275" align="right" /></a>
 
 PyPortfolioOpt is a library implementing portfolio optimization methods, including
 classical mean-variance optimization, Black-Litterman allocation, or shrinkage and Hierarchical Risk Parity.
