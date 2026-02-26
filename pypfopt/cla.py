@@ -145,7 +145,8 @@ class CLA(base_optimizer.BaseOptimizer):
             g4 = np.dot(covarF_inv, covarFB)
             w1 = np.dot(g4, wB)
             g4 = np.dot(onesF.T, w1)
-            g = float(-self.ls[-1] * g1 / g2 + (1 - g3 + g4) / g2)
+            g = -self.ls[-1] * g1 / g2 + (1 - g3 + g4) / g2
+            g = float(g[0, 0])
         # 2) compute weights
         w2 = np.dot(covarF_inv, onesF)
         w3 = np.dot(covarF_inv, meanF)
