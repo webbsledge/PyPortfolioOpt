@@ -174,8 +174,8 @@ class CLA(base_optimizer.BaseOptimizer):
             l2 = np.dot(covarF_inv, covarFB)
             l3 = np.dot(l2, wB)
             l2 = np.dot(onesF.T, l3)
-            res = float(((1 - l1 + l2) * c4[i] - c1 * (bi + l3[i])) / c)
-            res = res[0, 0]
+            res = ((1 - l1 + l2) * c4[i] - c1 * (bi + l3[i])) / c
+            res = float(res[0, 0])
             return res, bi
 
     def _get_matrices(self, f):
