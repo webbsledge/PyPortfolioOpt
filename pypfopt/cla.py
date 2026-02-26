@@ -168,7 +168,9 @@ class CLA(base_optimizer.BaseOptimizer):
         # 3) Lambda
         if wB is None:
             # All free assets
-            return float((c4[i] - c1 * bi) / c), bi
+            res = (c4[i] - c1 * bi) / c
+            res = float(res[0, 0])
+            return res, bi
         else:
             onesB = np.ones(wB.shape)
             l1 = np.dot(onesB.T, wB)
