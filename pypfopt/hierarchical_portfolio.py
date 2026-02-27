@@ -16,11 +16,11 @@ import collections
 
 import numpy as np
 import pandas as pd
-from pypfopt.base import BaseOptimizer, portfolio_performance
 import scipy.cluster.hierarchy as sch
 import scipy.spatial.distance as ssd
 
-from . import risk_models
+from pypfopt.base import BaseOptimizer, portfolio_performance
+from pypfopt.risk_models import cov_to_corr
 
 
 class HRPOpt(BaseOptimizer):
@@ -181,7 +181,7 @@ class HRPOpt(BaseOptimizer):
 
         if self.returns is None:
             cov = self.cov_matrix
-            corr = risk_models.cov_to_corr(self.cov_matrix).round(6)
+            corr = cov_to_corr(self.cov_matrix).round(6)
         else:
             corr, cov = self.returns.corr(), self.returns.cov()
 

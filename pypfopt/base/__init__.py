@@ -1,8 +1,8 @@
 """Base classes."""
 
 from pypfopt.base._base_optimizer import (
-    BaseOptimizer,
     BaseConvexOptimizer,
+    BaseOptimizer,
     portfolio_performance,
 )
 
