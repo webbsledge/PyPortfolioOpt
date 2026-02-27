@@ -8,18 +8,23 @@ evaluate return and risk for a given set of portfolio weights.
 """
 
 import collections
+from collections.abc import Iterable
 import copy
 import json
-import warnings
-from collections.abc import Iterable
 from typing import List
+import warnings
 
 import cvxpy as cp
 import numpy as np
 import pandas as pd
 import scipy.optimize as sco
 
-from . import exceptions, objective_functions
+from pypfopt.exceptions import InstantiationError, OptimizationError
+from pypfopt.objective_functions import (
+    portfolio_return,
+    portfolio_variance,
+    sharpe_ratio,
+)
 
 
 class BaseOptimizer:
@@ -276,14 +281,14 @@ class BaseConvexOptimizer(BaseOptimizer):
                 if param.name() == parameter_name and not is_defined:
                     is_defined = True
                 elif param.name() == parameter_name and is_defined:
-                    raise exceptions.InstantiationError(
+                    raise InstantiationError(
                         "Parameter name defined multiple times"
                     )
         return is_defined
 
     def update_parameter_value(self, parameter_name: str, new_value: float) -> None:
         if not self.is_parameter_defined(parameter_name):
-            raise exceptions.InstantiationError("Parameter has not been defined")
+            raise InstantiationError("Parameter has not been defined")
         was_updated = False
         objective_and_constraints = (
             self._constraints + [self._objective]
@@ -299,7 +304,7 @@ class BaseConvexOptimizer(BaseOptimizer):
                     param.value = new_value
                     was_updated = True
         if not was_updated:
-            raise exceptions.InstantiationError("Parameter was not updated")
+            raise InstantiationError("Parameter was not updated")
 
     def _solve_cvxpy_opt_problem(self):
         """
@@ -318,14 +323,14 @@ class BaseConvexOptimizer(BaseOptimizer):
                 self._initial_constraint_ids = {const.id for const in self._constraints}
             else:
                 if not self._objective.id == self._initial_objective:
-                    raise exceptions.InstantiationError(
+                    raise InstantiationError(
                         "The objective function was changed after the initial optimization. "
                         "Please create a new instance instead."
                     )
 
                 constr_ids = {const.id for const in self._constraints}
                 if not constr_ids == self._initial_constraint_ids:
-                    raise exceptions.InstantiationError(
+                    raise InstantiationError(
                         "The constraints were changed after the initial optimization. "
                         "Please create a new instance instead."
                     )
@@ -334,10 +339,10 @@ class BaseConvexOptimizer(BaseOptimizer):
             )
 
         except (TypeError, cp.DCPError) as e:
-            raise exceptions.OptimizationError from e
+            raise OptimizationError from e
 
         if self._opt.status not in {"optimal", "optimal_inaccurate"}:
-            raise exceptions.OptimizationError(
+            raise OptimizationError(
                 "Solver status: {}".format(self._opt.status)
             )
         self.weights = self._w.value.round(16) + 0.0  # +0.0 removes signed zero
@@ -361,7 +366,7 @@ class BaseConvexOptimizer(BaseOptimizer):
             the objective to be added (i.e function of cp.Variable)
         """
         if self._opt is not None:
-            raise exceptions.InstantiationError(
+            raise InstantiationError(
                 "Adding objectives to an already solved problem might have unintended consequences. "
                 "A new instance should be created for the new set of objectives."
             )
@@ -388,7 +393,7 @@ class BaseConvexOptimizer(BaseOptimizer):
                 "New constraint must be provided as a callable (e.g lambda function)"
             )
         if self._opt is not None:
-            raise exceptions.InstantiationError(
+            raise InstantiationError(
                 "Adding constraints to an already solved problem might have unintended consequences. "
                 "A new instance should be created for the new set of constraints."
             )
@@ -607,14 +612,14 @@ def portfolio_performance(
     else:
         raise ValueError("Weights is None")
 
-    sigma = np.sqrt(objective_functions.portfolio_variance(new_weights, cov_matrix))
+    sigma = np.sqrt(portfolio_variance(new_weights, cov_matrix))
 
     if expected_returns is not None:
-        mu = objective_functions.portfolio_return(
+        mu = portfolio_return(
             new_weights, expected_returns, negative=False
         )
 
-        sharpe = objective_functions.sharpe_ratio(
+        sharpe = sharpe_ratio(
             new_weights,
             expected_returns,
             cov_matrix,
