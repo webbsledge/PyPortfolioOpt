@@ -16,13 +16,14 @@ import collections
 
 import numpy as np
 import pandas as pd
+from pypfopt.base import BaseOptimizer, portfolio_performance
 import scipy.cluster.hierarchy as sch
 import scipy.spatial.distance as ssd
 
-from . import base_optimizer, risk_models
+from . import risk_models
 
 
-class HRPOpt(base_optimizer.BaseOptimizer):
+class HRPOpt(BaseOptimizer):
     """
     A HRPOpt object (inheriting from BaseOptimizer) constructs a hierarchical
     risk parity portfolio.
@@ -234,6 +235,4 @@ class HRPOpt(base_optimizer.BaseOptimizer):
             cov = self.returns.cov() * frequency
             mu = self.returns.mean() * frequency
 
-        return base_optimizer.portfolio_performance(
-            self.weights, mu, cov, verbose, risk_free_rate
-        )
+        return portfolio_performance(self.weights, mu, cov, verbose, risk_free_rate)

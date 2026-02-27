@@ -9,10 +9,12 @@ import cvxpy as cp
 import numpy as np
 import pandas as pd
 
-from .. import base_optimizer, exceptions, objective_functions
+from pypfopt.base import BaseConvexOptimizer, portfolio_performance
+
+from .. import exceptions, objective_functions
 
 
-class EfficientFrontier(base_optimizer.BaseConvexOptimizer):
+class EfficientFrontier(BaseConvexOptimizer):
     """
     An EfficientFrontier object (inheriting from BaseConvexOptimizer) contains multiple
     optimization methods that can be called (corresponding to different objective
@@ -500,7 +502,7 @@ class EfficientFrontier(base_optimizer.BaseConvexOptimizer):
                 )
             risk_free_rate = self._risk_free_rate
 
-        return base_optimizer.portfolio_performance(
+        return portfolio_performance(
             self.weights,
             self.expected_returns,
             self.cov_matrix,

@@ -7,10 +7,10 @@ by Marcos Lopez de Prado and David Bailey.
 import numpy as np
 import pandas as pd
 
-from . import base_optimizer
+from pypfopt.base import BaseOptimizer, portfolio_performance
 
 
-class CLA(base_optimizer.BaseOptimizer):
+class CLA(BaseOptimizer):
     """
     Instance variables:
 
@@ -506,7 +506,7 @@ class CLA(base_optimizer.BaseOptimizer):
         (float, float, float)
             expected return, volatility, Sharpe ratio.
         """
-        return base_optimizer.portfolio_performance(
+        return portfolio_performance(
             self.weights,
             self.expected_returns,
             self.cov_matrix,
