@@ -281,9 +281,7 @@ class BaseConvexOptimizer(BaseOptimizer):
                 if param.name() == parameter_name and not is_defined:
                     is_defined = True
                 elif param.name() == parameter_name and is_defined:
-                    raise InstantiationError(
-                        "Parameter name defined multiple times"
-                    )
+                    raise InstantiationError("Parameter name defined multiple times")
         return is_defined
 
     def update_parameter_value(self, parameter_name: str, new_value: float) -> None:
@@ -342,9 +340,7 @@ class BaseConvexOptimizer(BaseOptimizer):
             raise OptimizationError from e
 
         if self._opt.status not in {"optimal", "optimal_inaccurate"}:
-            raise OptimizationError(
-                "Solver status: {}".format(self._opt.status)
-            )
+            raise OptimizationError("Solver status: {}".format(self._opt.status))
         self.weights = self._w.value.round(16) + 0.0  # +0.0 removes signed zero
         return self._make_output_weights()
 
@@ -615,9 +611,7 @@ def portfolio_performance(
     sigma = np.sqrt(portfolio_variance(new_weights, cov_matrix))
 
     if expected_returns is not None:
-        mu = portfolio_return(
-            new_weights, expected_returns, negative=False
-        )
+        mu = portfolio_return(new_weights, expected_returns, negative=False)
 
         sharpe = sharpe_ratio(
             new_weights,
