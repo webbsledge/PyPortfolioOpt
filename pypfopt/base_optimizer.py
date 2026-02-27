@@ -39,10 +39,12 @@ class BaseOptimizer:
 
     def __init__(self, n_assets, tickers=None):
         """
-        :param n_assets: number of assets
-        :type n_assets: int
-        :param tickers: name of assets
-        :type tickers: list
+        Parameters
+        ----------
+        n_assets : int
+            number of assets
+        tickers : list
+            name of assets
         """
         self.n_assets = n_assets
         if tickers is None:
@@ -71,8 +73,10 @@ class BaseOptimizer:
         """
         Utility function to set weights attribute (np.array) from user input
 
-        :param input_weights: {ticker: weight} dict
-        :type input_weights: dict
+        Parameters
+        ----------
+        input_weights : dict
+            {ticker: weight} dict
         """
         self.weights = np.array([input_weights[ticker] for ticker in self.tickers])
 
@@ -81,13 +85,18 @@ class BaseOptimizer:
         Helper method to clean the raw weights, setting any weights whose absolute
         values are below the cutoff to zero, and rounding the rest.
 
-        :param cutoff: the lower bound, defaults to 1e-4
-        :type cutoff: float, optional
-        :param rounding: number of decimal places to round the weights, defaults to 5.
-                         Set to None if rounding is not desired.
-        :type rounding: int, optional
-        :return: asset weights
-        :rtype: OrderedDict
+        Parameters
+        ----------
+        cutoff : float, optional
+            the lower bound, defaults to 1e-4
+        rounding : int, optional
+            number of decimal places to round the weights, defaults to 5.
+            Set to None if rounding is not desired.
+
+        Returns
+        -------
+        OrderedDict
+            asset weights
         """
         if self.weights is None:
             raise AttributeError("Weights not yet computed")
@@ -104,8 +113,10 @@ class BaseOptimizer:
         """
         Utility method to save weights to a text file.
 
-        :param filename: name of file. Should be csv, json, or txt.
-        :type filename: str
+        Parameters
+        ----------
+        filename : str
+            name of file. Should be csv, json, or txt.
         """
         clean_weights = self.clean_weights()
 
@@ -160,16 +171,18 @@ class BaseConvexOptimizer(BaseOptimizer):
         solver_options=None,
     ):
         """
-        :param weight_bounds: minimum and maximum weight of each asset OR single min/max pair
-                              if all identical, defaults to (0, 1). Must be changed to (-1, 1)
-                              for portfolios with shorting.
-        :type weight_bounds: tuple OR tuple list, optional
-        :param solver: name of solver. list available solvers with: ``cvxpy.installed_solvers()``
-        :type solver: str, optional.
-        :param verbose: whether performance and debugging info should be printed, defaults to False
-        :type verbose: bool, optional
-        :param solver_options: parameters for the given solver
-        :type solver_options: dict, optional
+        Parameters
+        ----------
+        weight_bounds : tuple or list of tuples, optional
+            minimum and maximum weight of each asset OR single min/max pair
+            if all identical, defaults to (0, 1). Must be changed to (-1, 1)
+            for portfolios with shorting.
+        solver : str, optional
+            name of solver. list available solvers with: ``cvxpy.installed_solvers()``
+        verbose : bool, optional
+            whether performance and debugging info should be printed, defaults to False
+        solver_options : dict, optional
+            parameters for the given solver
         """
         super().__init__(n_assets, tickers)
 
@@ -204,12 +217,21 @@ class BaseConvexOptimizer(BaseOptimizer):
         """
         Convert input bounds into a form acceptable by cvxpy and add to the constraints list.
 
-        :param test_bounds: minimum and maximum weight of each asset OR single min/max pair
-                            if all identical OR pair of arrays corresponding to lower/upper bounds. defaults to (0, 1).
-        :type test_bounds: tuple OR list/tuple of tuples OR pair of np arrays
-        :raises TypeError: if ``test_bounds`` is not of the right type
-        :return: bounds suitable for cvxpy
-        :rtype: tuple pair of np.ndarray
+        Parameters
+        ----------
+        test_bounds : tuple or list/tuple of tuples or pair of np arrays
+            minimum and maximum weight of each asset OR single min/max pair
+            if all identical OR pair of arrays corresponding to lower/upper bounds. defaults to (0, 1).
+
+        Raises
+        ------
+        TypeError
+            if ``test_bounds`` is not of the right type
+
+        Returns
+        -------
+        tuple pair of np.ndarray
+            bounds suitable for cvxpy
         """
         # If it is a collection with the right length, assume they are all bounds.
         if len(test_bounds) == self.n_assets and not isinstance(
@@ -284,7 +306,10 @@ class BaseConvexOptimizer(BaseOptimizer):
         Helper method to solve the cvxpy problem and check output,
         once objectives and constraints have been defined
 
-        :raises exceptions.OptimizationError: if problem is not solvable by cvxpy
+        Raises
+        ------
+        exceptions.OptimizationError
+            if problem is not solvable by cvxpy
         """
         try:
             if self._opt is None:
@@ -330,8 +355,10 @@ class BaseConvexOptimizer(BaseOptimizer):
 
             ef.add_objective(L1_norm, k=2)
 
-        :param new_objective: the objective to be added
-        :type new_objective: cp.Expression (i.e function of cp.Variable)
+        Parameters
+        ----------
+        new_objective : cp.Expression
+            the objective to be added (i.e function of cp.Variable)
         """
         if self._opt is not None:
             raise exceptions.InstantiationError(
@@ -351,8 +378,10 @@ class BaseConvexOptimizer(BaseOptimizer):
             ef.add_constraint(lambda x : x >= 0.01)
             ef.add_constraint(lambda x: x <= np.array([0.01, 0.08, ..., 0.5]))
 
-        :param new_constraint: the constraint to be added
-        :type new_constraint: callable (e.g lambda function)
+        Parameters
+        ----------
+        new_constraint : callable
+            the constraint to be added (e.g lambda function)
         """
         if not callable(new_constraint):
             raise TypeError(
@@ -386,12 +415,14 @@ class BaseConvexOptimizer(BaseOptimizer):
                 "Oil/Gas": 0.1 # less than 10% oil and gas
             }
 
-        :param sector_mapper: dict that maps tickers to sectors
-        :type sector_mapper: {str: str} dict
-        :param sector_lower: lower bounds for each sector
-        :type sector_lower: {str: float} dict
-        :param sector_upper: upper bounds for each sector
-        :type sector_upper: {str:float} dict
+        Parameters
+        ----------
+        sector_mapper : {str: str} dict
+            dict that maps tickers to sectors
+        sector_lower : {str: float} dict
+            lower bounds for each sector
+        sector_upper : {str: float} dict
+            upper bounds for each sector
         """
         if np.any(self._lower_bounds < 0):
             warnings.warn(
@@ -416,14 +447,23 @@ class BaseConvexOptimizer(BaseOptimizer):
 
             w = ef.convex_objective(logarithmic_barrier, cov_matrix=ef.cov_matrix)
 
-        :param custom_objective: an objective function to be MINIMISED. This should be written using
-                                 cvxpy atoms Should map (w, `**kwargs`) -> float.
-        :type custom_objective: function with signature (cp.Variable, `**kwargs`) -> cp.Expression
-        :param weights_sum_to_one: whether to add the default objective, defaults to True
-        :type weights_sum_to_one: bool, optional
-        :raises OptimizationError: if the objective is nonconvex or constraints nonlinear.
-        :return: asset weights for the efficient risk portfolio
-        :rtype: OrderedDict
+        Parameters
+        ----------
+        custom_objective : function with signature (cp.Variable, **kwargs) -> cp.Expression
+            an objective function to be MINIMISED. This should be written using
+            cvxpy atoms Should map (w, ``**kwargs``) -> float.
+        weights_sum_to_one : bool, optional
+            whether to add the default objective, defaults to True
+
+        Raises
+        ------
+        OptimizationError
+            if the objective is nonconvex or constraints nonlinear.
+
+        Returns
+        -------
+        OrderedDict
+            asset weights for the efficient risk portfolio
         """
         # custom_objective must have the right signature (w, **kwargs)
         self._objective = custom_objective(self._w, **kwargs)
@@ -465,22 +505,27 @@ class BaseConvexOptimizer(BaseOptimizer):
                 constraints=constraints,
             )
 
-        :param objective_function: an objective function to be MINIMISED. This function
-                                   should map (weight, args) -> cost
-        :type objective_function: function with signature (np.ndarray, args) -> float
-        :param objective_args: arguments for the objective function (excluding weight)
-        :type objective_args: tuple of np.ndarrays
-        :param weights_sum_to_one: whether to add the default objective, defaults to True
-        :type weights_sum_to_one: bool, optional
-        :param constraints: list of constraints in the scipy format (i.e dicts)
-        :type constraints: dict list
-        :param solver: which SCIPY solver to use, e.g "SLSQP", "COBYLA", "BFGS".
-                       User beware: different optimizers require different inputs.
-        :type solver: string
-        :param initial_guess: the initial guess for the weights, shape (n,) or (n, 1)
-        :type initial_guess: np.ndarray
-        :return: asset weights that optimize the custom objective
-        :rtype: OrderedDict
+        Parameters
+        ----------
+        objective_function : function with signature (np.ndarray, args) -> float
+            an objective function to be MINIMISED. This function
+            should map (weight, args) -> cost
+        objective_args : tuple of np.ndarrays
+            arguments for the objective function (excluding weight)
+        weights_sum_to_one : bool, optional
+            whether to add the default objective, defaults to True
+        constraints : dict list
+            list of constraints in the scipy format (i.e dicts)
+        solver : string
+            which SCIPY solver to use, e.g "SLSQP", "COBYLA", "BFGS".
+            User beware: different optimizers require different inputs.
+        initial_guess : np.ndarray
+            the initial guess for the weights, shape (n,) or (n, 1)
+
+        Returns
+        -------
+        OrderedDict
+            asset weights that optimize the custom objective
         """
         # Sanitise inputs
         if not isinstance(objective_args, tuple):
@@ -519,20 +564,29 @@ def portfolio_performance(
     After optimising, calculate (and optionally print) the performance of the optimal
     portfolio. Currently calculates expected return, volatility, and the Sharpe ratio.
 
-    :param expected_returns: expected returns for each asset. Can be None if
-                             optimising for volatility only (but not recommended).
-    :type expected_returns: np.ndarray or pd.Series
-    :param cov_matrix: covariance of returns for each asset
-    :type cov_matrix: np.array or pd.DataFrame
-    :param weights: weights or assets
-    :type weights: list, np.array or dict, optional
-    :param verbose: whether performance should be printed, defaults to False
-    :type verbose: bool, optional
-    :param risk_free_rate: risk-free rate of borrowing/lending, defaults to 0.0
-    :type risk_free_rate: float, optional
-    :raises ValueError: if weights have not been calculated yet
-    :return: expected return, volatility, Sharpe ratio.
-    :rtype: (float, float, float)
+    Parameters
+    ----------
+    expected_returns : np.ndarray or pd.Series
+        expected returns for each asset. Can be None if
+        optimising for volatility only (but not recommended).
+    cov_matrix : np.array or pd.DataFrame
+        covariance of returns for each asset
+    weights : list, np.array or dict, optional
+        weights or assets
+    verbose : bool, optional
+        whether performance should be printed, defaults to False
+    risk_free_rate : float, optional
+        risk-free rate of borrowing/lending, defaults to 0.0
+
+    Raises
+    ------
+    ValueError
+        if weights have not been calculated yet
+
+    Returns
+    -------
+    (float, float, float)
+        expected return, volatility, Sharpe ratio.
     """
     if isinstance(weights, dict):
         if isinstance(expected_returns, pd.Series):
@@ -582,10 +636,15 @@ def _get_all_args(expression: cp.Expression) -> List[cp.Expression]:
     """
     Helper function to recursively get all arguments from a cvxpy expression
 
-    :param expression: input cvxpy expression
-    :type expression: cp.Expression
-    :return: a list of cvxpy arguments
-    :rtype: List[cp.Expression]
+    Parameters
+    ----------
+    expression : cp.Expression
+        input cvxpy expression
+
+    Returns
+    -------
+    List[cp.Expression]
+        a list of cvxpy arguments
     """
     if expression.args == []:
         return [expression]
